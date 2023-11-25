@@ -10,71 +10,8 @@
   [msg]
   (when (:debug @app-state) (dart/print msg)))
 
-
 (defn main []
   (f/run
    (m/MaterialApp
     .title "Shriner"
-    .home (login/login-page))))
-
-;; (defn main
-;;   []
-;;   (f/run
-;;    (m/MaterialApp
-;;     .title "Shriner"
-;;     .home
-;;     (m/Scaffold
-;;      .appBar (m/AppBar
-;;               .title (m/Text "Welcome to ClojureDart"))
-;;      .body
-;;      m/Center
-;;      (m/Text "Let's get coding!"
-;;              .style (m/TextStyle
-;;                      .color m.Colors/red
-;;                      .fontSize 32.0))))))
-
-    ;login/login-page)))
-
-
-;; (defonce home-page-state (atom {:selected-index 0}))
-;; (def home-page
-;;   (f/widget
-;;    :watch [{:keys [current favorites]} app-state]
-;;    :watch [{:keys [selected-index]} home-page-state]
-;;    :context ctx
-;;    :let [theme (m/Theme.of ctx)
-;;          color-container (-> theme .-colorScheme .-primaryContainer)
-;;          page (case selected-index
-;;                 0 (generator-page current favorites)
-;;                 1 (favorites-page favorites)
-;;                 (throw (dart/UnimplementedError "no widget for selected-index")))]
-;;    (m/LayoutBuilder
-;;     .builder (fn [_context constraints]
-;;                (m/Scaffold
-;;                 .body
-;;                 (m/Row
-;;                  .children
-;;                  [(m/SafeArea
-;;                    .child (m/NavigationRail
-;;                            .extended
-;;                            (>= (.-maxWidth ^m/BoxConstraints constraints) 600)
-;;                            .selectedIndex
-;;                            selected-index
-;;                            .onDestinationSelected
-;;                            #(do
-;;                               (swap! home-page-state assoc :selected-index %)
-;;                               (debug-print (str "selected " %)))
-;;                            .destinations
-;;                            [(m/NavigationRailDestination
-;;                              .icon (m/Icon m/Icons.home)
-;;                              .label (m/Text "Home"))
-;;                             (m/NavigationRailDestination
-;;                              .icon (m/Icon m/Icons.favorite)
-;;                              .label (m/Text "Favorites"))]))
-;;                   (m/Expanded
-;;                    .child
-;;                    (m/Container
-;;                     .color color-container,
-;;                     .child page))]))))))
-
-
+    .home login/login-page)))

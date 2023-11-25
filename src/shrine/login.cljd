@@ -2,8 +2,7 @@
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]))
 
-(defn login-page
-  []
+(def login-page
   (f/widget
    (m/Scaffold
     .body
@@ -14,7 +13,7 @@
       .children [(m/SizedBox .height 80.0)
                  (m/Column
                   .children
-                  [;Image.asset('assets/diamond.png'),
+                  [(m/Image.asset "assets/diamond.png")
                    (m/SizedBox .height 16.0)
                    (m/Text "SHRINE")])
                  (m/SizedBox .height 120.0)
