@@ -1,6 +1,5 @@
 (ns shrine.login
   (:require ["package:flutter/material.dart" :as m]
-            ;["dart:core" :as dart]
             [cljd.flutter :as f]))
 
 (defn login-page

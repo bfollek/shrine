@@ -1,69 +1,90 @@
 (ns shrine.main
   (:require ["package:flutter/material.dart" :as m]
-            ["package:english_words/english_words.dart" :as ew]
             ["dart:core" :as dart]
+            [shrine.login :as login]
             [cljd.flutter :as f]))
 
-(defonce app-state (atom {:current (.random ew/WordPair)
-                          :debug false
-                          :favorites #{}}))
+(defonce app-state (atom {}))
 
 (defn debug-print
   [msg]
   (when (:debug @app-state) (dart/print msg)))
 
 
-(defonce home-page-state (atom {:selected-index 0}))
-(def home-page
-  (f/widget
-   :watch [{:keys [current favorites]} app-state]
-   :watch [{:keys [selected-index]} home-page-state]
-   :context ctx
-   :let [theme (m/Theme.of ctx)
-         color-container (-> theme .-colorScheme .-primaryContainer)
-         page (case selected-index
-                0 (generator-page current favorites)
-                1 (favorites-page favorites)
-                (throw (dart/UnimplementedError "no widget for selected-index")))]
-   (m/LayoutBuilder
-    .builder (fn [_context constraints]
-               (m/Scaffold
-                .body
-                (m/Row
-                 .children
-                 [(m/SafeArea
-                   .child (m/NavigationRail
-                           .extended
-                           (>= (.-maxWidth ^m/BoxConstraints constraints) 600)
-                           .selectedIndex
-                           selected-index
-                           .onDestinationSelected
-                           #(do
-                              (swap! home-page-state assoc :selected-index %)
-                              (debug-print (str "selected " %)))
-                           .destinations
-                           [(m/NavigationRailDestination
-                             .icon (m/Icon m/Icons.home)
-                             .label (m/Text "Home"))
-                            (m/NavigationRailDestination
-                             .icon (m/Icon m/Icons.favorite)
-                             .label (m/Text "Favorites"))]))
-                  (m/Expanded
-                   .child
-                   (m/Container
-                    .color color-container,
-                    .child page))]))))))
-
 (defn main []
   (f/run
-   :let [app
-         (m/MaterialApp
-          .title "ClojureDart Namer App"
-          .theme (m/ThemeData
-                  .useMaterial3 true
-                  .colorScheme (m/ColorScheme.fromSeed .seedColor m/Colors.deepOrange))
-          .home home-page)]
-   (do
-     (swap! app-state assoc :debug (.-debugShowCheckedModeBanner app))
-     (dart/print (str "debug is " (:debug @app-state) "."))
-     app)))
+   (m/MaterialApp
+    .title "Welcome to Flutter"
+    .theme (m/ThemeData .primarySwatch m.Colors/pink))
+   .home
+   (m/Scaffold
+    .appBar (m/AppBar
+             .title (m/Text "Welcome to ClojureDart")))
+   .body
+   m/Center
+   (m/Text "Let's get coding!"
+           .style (m/TextStyle
+                   .color m.Colors/red
+                   .fontSize 32.0))))
+
+;; (defn main
+;;   []
+;;   (f/run
+;;    (m/MaterialApp
+;;     .title "Shriner"
+;;     .home
+;;     (m/Scaffold
+;;      .appBar (m/AppBar
+;;               .title (m/Text "Welcome to ClojureDart"))
+;;      .body
+;;      m/Center
+;;      (m/Text "Let's get coding!"
+;;              .style (m/TextStyle
+;;                      .color m.Colors/red
+;;                      .fontSize 32.0))))))
+
+    ;login/login-page)))
+
+
+;; (defonce home-page-state (atom {:selected-index 0}))
+;; (def home-page
+;;   (f/widget
+;;    :watch [{:keys [current favorites]} app-state]
+;;    :watch [{:keys [selected-index]} home-page-state]
+;;    :context ctx
+;;    :let [theme (m/Theme.of ctx)
+;;          color-container (-> theme .-colorScheme .-primaryContainer)
+;;          page (case selected-index
+;;                 0 (generator-page current favorites)
+;;                 1 (favorites-page favorites)
+;;                 (throw (dart/UnimplementedError "no widget for selected-index")))]
+;;    (m/LayoutBuilder
+;;     .builder (fn [_context constraints]
+;;                (m/Scaffold
+;;                 .body
+;;                 (m/Row
+;;                  .children
+;;                  [(m/SafeArea
+;;                    .child (m/NavigationRail
+;;                            .extended
+;;                            (>= (.-maxWidth ^m/BoxConstraints constraints) 600)
+;;                            .selectedIndex
+;;                            selected-index
+;;                            .onDestinationSelected
+;;                            #(do
+;;                               (swap! home-page-state assoc :selected-index %)
+;;                               (debug-print (str "selected " %)))
+;;                            .destinations
+;;                            [(m/NavigationRailDestination
+;;                              .icon (m/Icon m/Icons.home)
+;;                              .label (m/Text "Home"))
+;;                             (m/NavigationRailDestination
+;;                              .icon (m/Icon m/Icons.favorite)
+;;                              .label (m/Text "Favorites"))]))
+;;                   (m/Expanded
+;;                    .child
+;;                    (m/Container
+;;                     .color color-container,
+;;                     .child page))]))))))
+
+
