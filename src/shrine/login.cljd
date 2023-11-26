@@ -4,8 +4,8 @@
 
 (def login-page
   (f/widget
-   :let [username-controller (m/TextEditingController)
-         password-controller (m/TextEditingController)]
+   :let [^m/TextEditingController username-controller (m/TextEditingController)
+         ^m/TextEditingController password-controller (m/TextEditingController)]
    (m/Scaffold
     .body
     (m/SafeArea
@@ -32,13 +32,11 @@
                   .children [(m/TextButton
                               .child (m/Text "CANCEL")
                               .onPressed
-                              ;#(doall
-                              #(do
-                                 (.clear username-controller)
-                                 (.clear password-controller)))
-                                ;(.clear password-controller)))
-                            ;;   (fn [] (doall #(map .clear %)
-                            ;;                 [username-controller password-controller])))
+                             ;; new
+                              (fn [] (doall
+                                      #(map (.clear ^m/TextEditingController %)
+                                            [username-controller
+                                             password-controller]))))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
                               .onPressed #())])])))))
