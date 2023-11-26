@@ -4,6 +4,8 @@
 
 (def login-page
   (f/widget
+   :let [username-controller (m/TextEditingController)
+         password-controller (m/TextEditingController)]
    (m/Scaffold
     .body
     (m/SafeArea
@@ -18,16 +20,18 @@
                    (m/Text "SHRINE")])
                  (m/SizedBox .height 120.0)
                  (m/TextField
+                  .controller username-controller
                   .decoration (m/InputDecoration .filled true .labelText "Username"))
                  (m/SizedBox .height 12.0)
                  (m/TextField
+                  .controller password-controller
                   .decoration (m/InputDecoration .filled true .labelText "Password")
                   .obscureText true)
                  (m/OverflowBar
                   .alignment m/MainAxisAlignment.end
                   .children [(m/TextButton
                               .child (m/Text "CANCEL")
-                              .onPressed #())
+                              .onPressed #(.clear username-controller))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
                               .onPressed #())])])))))
