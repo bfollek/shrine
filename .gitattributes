@@ -1,3 +1,8 @@
-
 # Syntax highlighting for ClojureDart files
 *.cljd linguist-language=Clojure
+*.c linguist-detectable=false
+*.cmake linguist-detectable=false
+*.cpp linguist-detectable=false
+*.html linguist-detectable=false
+*.swift linguist-detectable=false
+
