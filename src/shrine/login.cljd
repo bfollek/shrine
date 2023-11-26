@@ -33,7 +33,9 @@
                               .child (m/Text "CANCEL")
                               .onPressed
                               ;#(doall
-                              #(.clear username-controller))
+                              #(do
+                                 (.clear username-controller)
+                                 (.clear password-controller)))
                                 ;(.clear password-controller)))
                             ;;   (fn [] (doall #(map .clear %)
                             ;;                 [username-controller password-controller])))
