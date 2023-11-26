@@ -4,6 +4,7 @@
 
 (def login-page
   (f/widget
+   :context ctx
    :let [username-controller (m/TextEditingController)
          password-controller (m/TextEditingController)]
    (m/Scaffold
@@ -38,4 +39,4 @@
                                             password-controller]))))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
-                              .onPressed #())])])))))
+                              .onPressed #(.pop m/Navigator ctx))])])))))
