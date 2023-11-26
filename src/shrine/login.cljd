@@ -31,7 +31,12 @@
                   .alignment m/MainAxisAlignment.end
                   .children [(m/TextButton
                               .child (m/Text "CANCEL")
-                              .onPressed #(.clear username-controller))
+                              .onPressed
+                              ;#(doall
+                              #(.clear username-controller))
+                                ;(.clear password-controller)))
+                            ;;   (fn [] (doall #(map .clear %)
+                            ;;                 [username-controller password-controller])))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
                               .onPressed #())])])))))
