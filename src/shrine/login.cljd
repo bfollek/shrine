@@ -22,4 +22,12 @@
                  (m/SizedBox .height 12.0)
                  (m/TextField
                   .decoration (m/InputDecoration .filled true .labelText "Password")
-                  .obscureText true)])))))
+                  .obscureText true)
+                 (m/OverflowBar
+                  .alignment m/MainAxisAlignment.end
+                  .children [(m/TextButton
+                              .child (m/Text "CANCEL")
+                              .onPressed #())
+                             (m/ElevatedButton
+                              .child (m/Text "NEXT")
+                              .onPressed #())])])))))
