@@ -7,10 +7,6 @@
 
 (defonce app-state (atom {}))
 
-(defn debug-print
-  [msg]
-  (when (:debug @app-state) (dart/print msg)))
-
 (defn main []
   (f/run
    (m/MaterialApp

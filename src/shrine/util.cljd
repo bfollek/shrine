@@ -1,0 +1,8 @@
+(ns shrine.util
+  (:require
+   ["dart:core" :as dart]))
+
+(defn log
+  "For now, print to the console."
+  [message]
+  (dart/print message))

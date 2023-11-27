@@ -1,7 +1,7 @@
 (ns shrine.home
   (:require ["package:flutter/material.dart" :as m]
-            ["dart:core" :as dart]
-            [cljd.flutter :as f]))
+            [cljd.flutter :as f]
+            [shrine.util :as u]))
 
 (defn ^m/Widget home-page
   [_ctx]
@@ -11,15 +11,15 @@
              .leading (m/IconButton
                        .icon (m/Icon m/Icons.menu
                                      .semanticLabel "menu")
-                       .onPressed #(dart/print "Menu button"))
+                       .onPressed #(u/log "Menu button"))
              .actions [(m/IconButton
                         .icon (m/Icon m/Icons.search
                                       .semanticLabel "search")
-                        .onPressed #(dart/print "Search button"))
+                        .onPressed #(u/log "Search button"))
                        (m/IconButton
                         .icon (m/Icon m/Icons.tune
                                       .semanticLabel "filter"),
-                        .onPressed #(dart/print "Filter button"))]
+                        .onPressed #(u/log "Filter button"))]
              .title (m/Text "SHRINE"))
     .body
     (m/Center
