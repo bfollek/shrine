@@ -22,6 +22,9 @@
                         .onPressed #(u/log "Filter button"))]
              .title (m/Text "SHRINE"))
     .body
-    (m/Center
-     .child (m/Text "You did it!"))
+    (.count m/GridView
+            .crossAxisCount 2
+            .padding (m/EdgeInsets.all 16.0)
+            .childAspectRatio (/ 8.0 9.0)
+            .children [(m/Card)])
     .resizeToAvoidBottomInset false)))
