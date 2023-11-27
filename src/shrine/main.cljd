@@ -16,8 +16,8 @@
    (m/MaterialApp
     .title "Shrine"
     .initialRoute "/login"
-    .routes {"/login" (fn [_context] login/login-page)
-             "/" (fn [_context] home/home-page)})))
+    .routes {"/login" login/login-page
+             "/" home/home-page})))
     ;;.home login/login-page)))
 
 ;;  title: 'Shrine',

@@ -2,7 +2,8 @@
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]))
 
-(def home-page
+(defn ^m/Widget home-page
+  [ctx]
   (f/widget
    (m/Scaffold
     .body

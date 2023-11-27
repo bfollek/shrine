@@ -2,7 +2,8 @@
   (:require ["package:flutter/material.dart" :as m]
             [cljd.flutter :as f]))
 
-(def login-page
+(defn ^m/Widget login-page
+  [ctx]
   (f/widget
    :context ctx
    :let [username-controller (m/TextEditingController)
