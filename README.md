@@ -2,8 +2,8 @@
 
 ### Work In Progress
 
-I'm going through this sequence of [Flutter](
-https://codelabs.developers.google.com/codelabs/mdc-101-flutter)  [tutorials](https://codelabs.developers.google.com/codelabs/mdc-102-flutter) in order, using ClojureDart instead of Dart.
+I'm going through this sequence of [four](
+https://codelabs.developers.google.com/codelabs/mdc-101-flutter)  [progressive](https://codelabs.developers.google.com/codelabs/mdc-102-flutter) [Flutter](https://codelabs.developers.google.com/codelabs/mdc-103-flutter) [tutorials](https://codelabs.developers.google.com/codelabs/mdc-104-flutter), using ClojureDart instead of Dart.
 
 ### Status
 
