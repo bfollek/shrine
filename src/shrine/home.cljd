@@ -6,6 +6,8 @@
   [_ctx]
   (f/widget
    (m/Scaffold
+    .appBar (m/AppBar
+             .title (m/Text "SHRINE"))
     .body
     (m/Center
      .child (m/Text "You did it!"))
