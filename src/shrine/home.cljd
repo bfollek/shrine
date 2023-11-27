@@ -26,5 +26,22 @@
             .crossAxisCount 2
             .padding (m/EdgeInsets.all 16.0)
             .childAspectRatio (/ 8.0 9.0)
-            .children [(m/Card)])
+            .children [(m/Card
+                        .clipBehavior m/Clip.antiAlias
+                        .child (m/Column
+                                .crossAxisAlignment m/CrossAxisAlignment.start
+                                .children [(m/AspectRatio
+                                            .aspectRatio (/ 18.0 11.0)
+                                            .child
+                                            (m/Image.asset "assets/diamond.png"))
+                                           (m/Padding
+                                            .padding (m/EdgeInsets.fromLTRB
+                                                      16.0 12.0 16.0 8.0)
+                                            .child
+                                            (m/Column
+                                             .crossAxisAlignment m/CrossAxisAlignment.start
+                                             .children [(m/Text "Title")
+                                                        (m/SizedBox .height 8.0)
+                                                        (m/Text
+                                                         "Secondary Text")]))]))])
     .resizeToAvoidBottomInset false)))
