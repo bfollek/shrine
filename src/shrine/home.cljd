@@ -1,5 +1,6 @@
 (ns shrine.home
   (:require ["package:flutter/material.dart" :as m]
+            ["dart:core" :as dart]
             [cljd.flutter :as f]))
 
 (defn ^m/Widget home-page
@@ -7,6 +8,10 @@
   (f/widget
    (m/Scaffold
     .appBar (m/AppBar
+             .leading (m/IconButton
+                       .icon (m/Icon m/Icons.menu
+                                     .semanticLabel "menu")
+                       .onPressed #(dart/print "Menu button"))
              .title (m/Text "SHRINE"))
     .body
     (m/Center
