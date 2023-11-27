@@ -5,7 +5,6 @@
 (defn ^m/Widget login-page
   [ctx]
   (f/widget
-   :context ctx
    :let [username-controller (m/TextEditingController)
          password-controller (m/TextEditingController)]
    (m/Scaffold

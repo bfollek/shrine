@@ -3,7 +3,7 @@
             [cljd.flutter :as f]))
 
 (defn ^m/Widget home-page
-  [ctx]
+  [_ctx]
   (f/widget
    (m/Scaffold
     .body
