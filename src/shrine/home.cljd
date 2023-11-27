@@ -7,5 +7,5 @@
    (m/Scaffold
     .body
     (m/Center
-     .child (m/Text "You did it!")
-     .resizeToAvoidBottomInset false))))
+     .child (m/Text "You did it!"))
+    .resizeToAvoidBottomInset false)))
