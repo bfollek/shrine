@@ -1,0 +1,20 @@
+(ns shrine.model.product)
+
+;; A product is a map with these keys:
+;; category: keyword. (:all | :accessories | :clothing | :home)
+;; id: int
+;; is-featured: bool
+;; name: string
+;; price: int
+
+(defn asset-name
+  [product]
+  (str (:id product) "-0.jpg"))
+
+(defn asset-package
+  [_product]
+  "shrine-images")
+
+(defn to-string
+  [product]
+  (str (:name product) " (id=" (:id product) ")"))
