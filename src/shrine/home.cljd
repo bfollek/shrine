@@ -1,5 +1,6 @@
 (ns shrine.home
   (:require ["package:flutter/material.dart" :as m]
+            ["package:intl/intl.dart" :as i]
             [cljd.flutter :as f]
             [shrine.util :as u]))
 
