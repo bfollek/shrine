@@ -3,43 +3,27 @@
             [cljd.flutter :as f]
             [shrine.util :as u]))
 
-(defn build-grid-cards
-  [count])
-
-;; // TODO: Make a collection of cards (102)
-;; List<Card> _buildGridCards(int count) {
-;;   List<Card> cards = List.generate(
-;;     count,
-;;     (int index) {
-;;       return Card(
-;;         clipBehavior: Clip.antiAlias,
-;;         child: Column(
-;;           crossAxisAlignment: CrossAxisAlignment.start,
-;;           children: <Widget>[
-;;             AspectRatio(
-;;               aspectRatio: 18.0 / 11.0,
-;;               child: Image.asset('assets/diamond.png'),
-;;             ),
-;;             Padding(
-;;               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-;;               child: Column(
-;;                 crossAxisAlignment: CrossAxisAlignment.start,
-;;                 children: const <Widget>[
-;;                   Text('Title'),
-;;                   SizedBox(height: 8.0),
-;;                   Text('Secondary Text'),
-;;                 ],
-;;               ),
-;;             ),
-;;           ],
-;;         ),
-;;       );
-;;     },
-;;   );
-;;   return cards;
-;; }
-
-
+(defn ^:private build-grid-cards
+  [cnt]
+  (for [_i (range 0 cnt)]
+    (m/Card
+     .clipBehavior m/Clip.antiAlias
+     .child (m/Column
+             .crossAxisAlignment m/CrossAxisAlignment.start
+             .children [(m/AspectRatio
+                         .aspectRatio (/ 18.0 11.0)
+                         .child
+                         (m/Image.asset "assets/diamond.png"))
+                        (m/Padding
+                         .padding (m/EdgeInsets.fromLTRB
+                                   16.0 12.0 16.0 8.0)
+                         .child
+                         (m/Column
+                          .crossAxisAlignment m/CrossAxisAlignment.start
+                          .children [(m/Text "Title")
+                                     (m/SizedBox .height 8.0)
+                                     (m/Text
+                                      "Secondary Text")]))]))))
 
 (defn ^m/Widget home-page
   [_ctx]
@@ -64,22 +48,5 @@
             .crossAxisCount 2
             .padding (m/EdgeInsets.all 16.0)
             .childAspectRatio (/ 8.0 9.0)
-            .children [(m/Card
-                        .clipBehavior m/Clip.antiAlias
-                        .child (m/Column
-                                .crossAxisAlignment m/CrossAxisAlignment.start
-                                .children [(m/AspectRatio
-                                            .aspectRatio (/ 18.0 11.0)
-                                            .child
-                                            (m/Image.asset "assets/diamond.png"))
-                                           (m/Padding
-                                            .padding (m/EdgeInsets.fromLTRB
-                                                      16.0 12.0 16.0 8.0)
-                                            .child
-                                            (m/Column
-                                             .crossAxisAlignment m/CrossAxisAlignment.start
-                                             .children [(m/Text "Title")
-                                                        (m/SizedBox .height 8.0)
-                                                        (m/Text
-                                                         "Secondary Text")]))]))])
+            .children (build-grid-cards 10))
     .resizeToAvoidBottomInset false)))
