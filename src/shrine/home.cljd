@@ -2,6 +2,8 @@
   (:require ["package:flutter/material.dart" :as m]
             ["package:intl/intl.dart" :as i]
             [cljd.flutter :as f]
+            [shrine.model.product :as p]
+            [shrine.model.products-repository :as pr]
             [shrine.util :as u]))
 
 (defn ^:private build-grid-cards

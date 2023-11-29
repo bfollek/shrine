@@ -1,9 +1,7 @@
 (ns shrine.model.products-repository
-  (:require ["package:flutter/material.dart" :as m]
-            [shrine.model.product :as p]))
+  (:require [shrine.model.product :as p]))
 
-(defn ^:private product-list
-  []
+(def ^:private all-products
   [{:category :accessories
     :id 0
     :featured? true
@@ -195,9 +193,12 @@
     :name "Fine lines tee"
     :price 58}])
 
-(defn all-products
+(defn load-products
   [category]
-  (let [prods (product-list)]
+  (let [prods (all-products)]
+    (doseq [prod prods]
+      (when (not (p/valid? prod))
+        (throw (Exception. (str "Invalid product: " (p/to-string prod))))))
     (if (= category :all)
       prods
       (filter #(= category (:category %)) prods))))
