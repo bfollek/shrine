@@ -1,15 +1,4 @@
-(ns shrine.model.product
-  (:require [malli.core :as malli]))
-
-(def valid?
-  "Validates a product map."
-  (malli/validator
-   [:map
-    [:category [:enum :accessories :clothing :home]]
-    [:id :int]
-    [:featured? :boolean]
-    [:name :string]
-    [:price :int]]))
+(ns shrine.model.product)
 
 (defn asset-name
   [product]
