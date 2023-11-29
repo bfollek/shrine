@@ -196,9 +196,6 @@
 (defn load-products
   [category]
   (let [prods (all-products)]
-    (doseq [prod prods]
-      (when (not (p/valid? prod))
-        (throw (Exception. (str "Invalid product: " (p/to-string prod))))))
     (if (= category :all)
       prods
       (filter #(= category (:category %)) prods))))

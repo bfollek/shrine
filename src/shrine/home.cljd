@@ -29,33 +29,33 @@
                                       "Secondary Text")]))]))))
 
 (defn ^:private build-grid-cards
-  [cnt]
-  (for [_i (range 0 cnt)]
-    (m/Card
-     .clipBehavior m/Clip.antiAlias
-     .child (m/Column
-             .crossAxisAlignment m/CrossAxisAlignment.start
-             .children [(m/AspectRatio
-                         .aspectRatio (/ 18.0 11.0)
-                         .child
-                         (m/Image.asset "assets/diamond.png"))
-                        (m/Padding
-                         .padding (m/EdgeInsets.fromLTRB
-                                   16.0 12.0 16.0 8.0)
-                         .child
-                         (m/Column
-                          .crossAxisAlignment m/CrossAxisAlignment.start
-                          .children [(m/Text "Title")
-                                     (m/SizedBox .height 8.0)
-                                     (m/Text
-                                      "Secondary Text")]))]))))
+  [ctx]
+  (let [prods (pr/load-prodcuts :all)]
+    (if (seq prods)
+      (let [;;   final ThemeData theme = Theme.of(context);
+;;   final NumberFormat formatter = NumberFormat.simpleCurrency(
+;;       locale: Localizations.localeOf(context).toString());]
 
-;; List<Card> _buildGridCards(BuildContext context) {
-;;   List<Product> products = ProductsRepository.loadProducts(Category.all);
 
-;;   if (products.isEmpty) {
-;;     return const <Card>[];
-;;   }
+      (for [_i (range 0 cnt)]
+        (m/Card
+         .clipBehavior m/Clip.antiAlias
+         .child (m/Column
+                 .crossAxisAlignment m/CrossAxisAlignment.start
+                 .children [(m/AspectRatio
+                             .aspectRatio (/ 18.0 11.0)
+                             .child
+                             (m/Image.asset "assets/diamond.png"))
+                            (m/Padding
+                             .padding (m/EdgeInsets.fromLTRB
+                                       16.0 12.0 16.0 8.0)
+                             .child
+                             (m/Column
+                              .crossAxisAlignment m/CrossAxisAlignment.start
+                              .children [(m/Text "Title")
+                                         (m/SizedBox .height 8.0)
+                                         (m/Text
+                                          "Secondary Text")]))]))))
 
 ;;   final ThemeData theme = Theme.of(context);
 ;;   final NumberFormat formatter = NumberFormat.simpleCurrency(
@@ -106,28 +106,28 @@
 ;;   }).toList();
 ;; }
 
-(defn ^m/Widget home-page
-  [_ctx]
-  (f/widget
-   (m/Scaffold
-    .appBar (m/AppBar
-             .leading (m/IconButton
-                       .icon (m/Icon m/Icons.menu
-                                     .semanticLabel "menu")
-                       .onPressed #(u/log "Menu button"))
-             .actions [(m/IconButton
-                        .icon (m/Icon m/Icons.search
-                                      .semanticLabel "search")
-                        .onPressed #(u/log "Search button"))
-                       (m/IconButton
-                        .icon (m/Icon m/Icons.tune
-                                      .semanticLabel "filter"),
-                        .onPressed #(u/log "Filter button"))]
-             .title (m/Text "SHRINE"))
-    .body
-    (.count m/GridView
-            .crossAxisCount 2
-            .padding (m/EdgeInsets.all 16.0)
-            .childAspectRatio (/ 8.0 9.0)
-            .children (build-grid-cards 10))
-    .resizeToAvoidBottomInset false)))
+    (defn ^m/Widget home-page
+      [ctx]
+      (f/widget
+       (m/Scaffold
+        .appBar (m/AppBar
+                 .leading (m/IconButton
+                           .icon (m/Icon m/Icons.menu
+                                         .semanticLabel "menu")
+                           .onPressed #(u/log "Menu button"))
+                 .actions [(m/IconButton
+                            .icon (m/Icon m/Icons.search
+                                          .semanticLabel "search")
+                            .onPressed #(u/log "Search button"))
+                           (m/IconButton
+                            .icon (m/Icon m/Icons.tune
+                                          .semanticLabel "filter"),
+                            .onPressed #(u/log "Filter button"))]
+                 .title (m/Text "SHRINE"))
+        .body
+        (.count m/GridView
+                .crossAxisCount 2
+                .padding (m/EdgeInsets.all 16.0)
+                .childAspectRatio (/ 8.0 9.0)
+                .children (build-grid-cards ctx))
+        .resizeToAvoidBottomInset false)))
