@@ -195,7 +195,6 @@
 
 (defn load-products
   [category]
-  (let [prods (all-products)]
-    (if (= category :all)
-      prods
-      (filter #(= category (:category %)) prods))))
+  (if (= category :all)
+    all-products
+    (filter #(= category (:category %)) all-products)))
