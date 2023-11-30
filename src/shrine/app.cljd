@@ -3,6 +3,8 @@
             [cljd.flutter :as f]
             [shrine.colors :as c]))
 
+(defonce app-state (atom {}))
+
 (defn build-shrine-theme
   []
   (let [base (.light m/ThemeData .useMaterial3 true)
