@@ -6,9 +6,9 @@
             [shrine.model.products-repository :as pr]
             [shrine.util :as u]))
 
-(defn ^:private build-grid-cards-old
-  [cnt]
-  (for [_i (range 0 cnt)]
+(defn ^:private card
+  [prod theme ^i/NumberFormat formatter]
+  (let [textTheme (.-textTheme theme)]
     (m/Card
      .clipBehavior m/Clip.antiAlias
      .child (m/Column
@@ -16,67 +16,24 @@
              .children [(m/AspectRatio
                          .aspectRatio (/ 18.0 11.0)
                          .child
-                         (m/Image.asset "assets/diamond.png"))
+                         (m/Image.asset
+                          (p/asset-name prod)
+                          .package (p/asset-package prod)
+                          .fit m/BoxFit.fitWidth))
                         (m/Padding
                          .padding (m/EdgeInsets.fromLTRB
                                    16.0 12.0 16.0 8.0)
                          .child
                          (m/Column
                           .crossAxisAlignment m/CrossAxisAlignment.start
-                          .children [(m/Text "Title")
+                          .children [(m/Text
+                                      (:name prod)
+                                      .style (.-titleLarge textTheme)
+                                      .maxLines 1)
                                      (m/SizedBox .height 8.0)
                                      (m/Text
-                                      "Secondary Text")]))]))))
-
-;;             
-;;           Expanded(
-;;             child: Padding(
-;;               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-;;               child: Column(
-;;                // TODO: Align labels to the bottom and center (103)
-;;                crossAxisAlignment: CrossAxisAlignment.start,
-;;                 // TODO: Change innermost Column (103)
-;;                 children: <Widget>[
-;;                  // TODO: Handle overflowing labels (103)
-;;                  Text(
-;;                     product.name,
-;;                     style: theme.textTheme.titleLarge,
-;;                     maxLines: 1,
-;;                   ),
-;;                   const SizedBox(height: 8.0),
-;;                   Text(
-;;                     formatter.format(product.price),
-;;                     style: theme.textTheme.titleSmall,
-;;                   ),
-
-
-(defn ^:private card
-  [prod theme ^i/NumberFormat formatter]
-  (m/Card
-   .clipBehavior m/Clip.antiAlias
-   .child (m/Column
-           .crossAxisAlignment m/CrossAxisAlignment.start
-           .children [(m/AspectRatio
-                       .aspectRatio (/ 18.0 11.0)
-                       .child
-                       (m/Image.asset
-                        (p/asset-name prod)
-                        .package (p/asset-package prod)
-                        .fit m/BoxFit.fitWidth))
-                      (m/Padding
-                       .padding (m/EdgeInsets.fromLTRB
-                                 16.0 12.0 16.0 8.0)
-                       .child
-                       (m/Column
-                        .crossAxisAlignment m/CrossAxisAlignment.start
-                        .children [(m/Text
-                                    (:name prod)
-                                    .style (-> theme ^m/TextTheme .-textTheme ^m/TextStyle .-titleLarge)
-                                    .maxLines 1)
-                                   (m/SizedBox .height 8.0)
-                                   (m/Text
-                                    (.format formatter (:price prod))
-                                    .style (-> theme ^m/TextTheme .-textTheme ^m/TextStyle .-titleSmall))]))])))
+                                      (.format formatter (:price prod))
+                                      .style (.-titleSmall textTheme))]))]))))
 
 (defn ^:private build-grid-cards
   [ctx]
@@ -84,9 +41,8 @@
     (if (seq prods)
       (let [theme (m/Theme.of ctx)
             locale (.toString (m/Localizations.localeOf ctx))
-            formatter (.simpleCurrency i/NumberFormat .locale locale)
-            cards (into [] (map #(card % theme formatter) prods))]
-        cards)
+            formatter (.simpleCurrency i/NumberFormat .locale locale)]
+        (map #(card % theme formatter) prods))
       []))) ;; Else no products, so return an empty vector.
 
 (defn ^m/Widget home-page
