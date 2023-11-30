@@ -61,7 +61,8 @@
                        .child
                        (m/Image.asset
                         (p/asset-name prod)
-                        .package (p/asset-package prod)))
+                        .package (p/asset-package prod)
+                        .fit m/BoxFit.fitWidth))
                       (m/Padding
                        .padding (m/EdgeInsets.fromLTRB
                                  16.0 12.0 16.0 8.0)
