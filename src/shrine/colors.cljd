@@ -1,0 +1,14 @@
+(ns shrine.colors
+  (:require ["package:flutter/material.dart" :as m]))
+
+(def shrine-pink-50 (m/Color 0xFFFEEAE6))
+(def shrine-pink-100 (m/Color 0xFFFEDBD0))
+(def shrine-pink-300 (m/Color 0xFFFBB8AC))
+(def shrine-pink-400 (m/Color 0xFFEAA4A4))
+
+(def shrine-brown-900 (m/Color 0xFF442B2D))
+
+(def shrine-error-red (m/Color 0xFFC5032B))
+
+(def shrine-surface-white (m/Color 0xFFFFFBFA))
+(def shrine-background-white m/Colors.white)
