@@ -2,7 +2,6 @@
   (:require ["package:flutter/material.dart" :as m]
             ["package:intl/intl.dart" :as i]
             [cljd.flutter :as f]
-            ["dart:core" :as dart]
             [shrine.model.product :as p]
             [shrine.model.products-repository :as pr]
             [shrine.util :as u]))
@@ -29,61 +28,7 @@
                                      (m/Text
                                       "Secondary Text")]))]))))
 
-;; (defn ^:private card
-;;   [prod]
-;;   (m/Card
-;;    .clipBehavior m/Clip.antiAlias
-;;    .child (m/Column
-;;            .crossAxisAlignment m/CrossAxisAlignment.start
-;;            .children [(m/AspectRatio
-;;                        .aspectRatio (/ 18.0 11.0)
-;;                        .child
-;;                        (m/Image.asset "assets/diamond.png"))
-;;                       (m/Padding
-;;                        .padding (m/EdgeInsets.fromLTRB
-;;                                  16.0 12.0 16.0 8.0)
-;;                        .child
-;;                        (m/Column
-;;                         .crossAxisAlignment m/CrossAxisAlignment.start
-;;                         .children [(m/Text "Title")
-;;                                    (m/SizedBox .height 8.0)
-;;                                    (m/Text
-;;                                     "Secondary Text")]))])))
-
-;; (defn ^:private build-grid-cards
-;;   [ctx]
-;;   (let [prods (pr/load-products :all)]
-;;     (dart/print (str "# of prods: " (count prods)))
-;;     []))
-    ;; (if (seq prods)
-    ;;   (let [theme (m/Theme.of ctx)
-    ;;         locale (.toString (m/Localizations.localeOf ctx))
-    ;;         formatter (.simpleCurrency i/NumberFormat .locale locale)
-    ;;         cards (into [] (map #(card %) prods))]
-    ;;     (dart/print (first cards))
-    ;;     cards)
-    ;;   []))) ;; Else no products, so return an empty vector.
-
-;;   final ThemeData theme = Theme.of(context);
-;;   final NumberFormat formatter = NumberFormat.simpleCurrency(
-;;       locale: Localizations.localeOf(context).toString());
-
-;;   return products.map((product) {
-;;     return Card(
-;;       clipBehavior: Clip.antiAlias,
-;;       // TODO: Adjust card heights (103)
-;;       child: Column(
-;;         // TODO: Center items on the card (103)
-;;         crossAxisAlignment: CrossAxisAlignment.start,
-;;         children: <Widget>[
-;;           AspectRatio(
-;;             aspectRatio: 18 / 11,
-;;             child: Image.asset(
-;;               product.assetName,
-;;               package: product.assetPackage,
-;;              // TODO: Adjust the box size (102)
-;;             ),
-;;           ),
+;;             
 ;;           Expanded(
 ;;             child: Padding(
 ;;               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
@@ -103,15 +48,45 @@
 ;;                     formatter.format(product.price),
 ;;                     style: theme.textTheme.titleSmall,
 ;;                   ),
-;;                 ],
-;;               ),
-;;             ),
-;;           ),
-;;         ],
-;;       ),
-;;     );
-;;   }).toList();
-;; }
+
+
+(defn ^:private card
+  [prod theme formatter]
+  (m/Card
+   .clipBehavior m/Clip.antiAlias
+   .child (m/Column
+           .crossAxisAlignment m/CrossAxisAlignment.start
+           .children [(m/AspectRatio
+                       .aspectRatio (/ 18.0 11.0)
+                       .child
+                       (m/Image.asset
+                        (p/asset-name prod)
+                        .package (p/asset-package prod)))
+                      (m/Padding
+                       .padding (m/EdgeInsets.fromLTRB
+                                 16.0 12.0 16.0 8.0)
+                       .child
+                       (m/Column
+                        .crossAxisAlignment m/CrossAxisAlignment.start
+                        .children [(m/Text
+                                    (:name prod)
+                                    .style (-> theme .-textTheme .-titleLarge)
+                                    .maxLines 1)
+                                   (m/SizedBox .height 8.0)
+                                   (m/Text
+                                    (.format formatter (:price prod))
+                                    .style (-> theme .-textTheme .-titleSmall))]))])))
+
+(defn ^:private build-grid-cards
+  [ctx]
+  (let [prods (pr/load-products :all)]
+    (if (seq prods)
+      (let [theme (m/Theme.of ctx)
+            locale (.toString (m/Localizations.localeOf ctx))
+            formatter (.simpleCurrency i/NumberFormat .locale locale)
+            cards (into [] (map #(card % theme formatter) prods))]
+        cards)
+      []))) ;; Else no products, so return an empty vector.
 
 (defn ^m/Widget home-page
   [ctx]
@@ -136,5 +111,5 @@
             .crossAxisCount 2
             .padding (m/EdgeInsets.all 16.0)
             .childAspectRatio (/ 8.0 9.0)
-            .children (build-grid-cards-old 10))
+            .children (build-grid-cards ctx))
     .resizeToAvoidBottomInset false)))

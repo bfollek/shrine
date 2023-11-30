@@ -6,7 +6,7 @@
 
 (defn asset-package
   [_product]
-  "shrine-images")
+  "shrine_images")
 
 (defn to-string
   [product]
