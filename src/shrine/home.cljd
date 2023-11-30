@@ -51,7 +51,7 @@
 
 
 (defn ^:private card
-  [prod theme formatter]
+  [prod theme ^i/NumberFormat formatter]
   (m/Card
    .clipBehavior m/Clip.antiAlias
    .child (m/Column
@@ -71,12 +71,12 @@
                         .crossAxisAlignment m/CrossAxisAlignment.start
                         .children [(m/Text
                                     (:name prod)
-                                    .style (-> theme .-textTheme .-titleLarge)
+                                    .style (-> theme ^m/TextTheme .-textTheme ^m/TextStyle .-titleLarge)
                                     .maxLines 1)
                                    (m/SizedBox .height 8.0)
                                    (m/Text
                                     (.format formatter (:price prod))
-                                    .style (-> theme .-textTheme .-titleSmall))]))])))
+                                    .style (-> theme ^m/TextTheme .-textTheme ^m/TextStyle .-titleSmall))]))])))
 
 (defn ^:private build-grid-cards
   [ctx]
