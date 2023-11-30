@@ -1,5 +1,4 @@
-(ns shrine.model.products-repository
-  (:require [shrine.model.product :as p]))
+(ns shrine.model.products-repository)
 
 (def ^:private all-products
   [{:category :accessories
