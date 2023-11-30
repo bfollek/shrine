@@ -1,6 +1,6 @@
 (ns shrine.main
   (:require ["package:flutter/material.dart" :as m]
-            ["dart:core" :as dart]
+            [shrine.app :as app]
             [shrine.home :as home]
             [shrine.login :as login]
             [cljd.flutter :as f]))
@@ -11,6 +11,7 @@
   (f/run
    (m/MaterialApp
     .title "Shrine"
+    .theme app/shrine-theme
     .initialRoute "/login"
     .routes {"/login" login/login-page
              "/" home/home-page})))
