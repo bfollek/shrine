@@ -7,8 +7,8 @@
             [shrine.util :as u]))
 
 (defn ^:private card
-  [prod theme ^i/NumberFormat formatter]
-  (let [textTheme (.-textTheme theme)]
+  [prod ^m/ThemeData theme-data ^i/NumberFormat formatter]
+  (let [textTheme (.-textTheme theme-data)]
     (m/Card
      .clipBehavior m/Clip.antiAlias
      .child (m/Column
@@ -39,10 +39,10 @@
   [ctx]
   (let [prods (pr/load-products :all)]
     (if (seq prods)
-      (let [theme (m/Theme.of ctx)
+      (let [theme-data (m/Theme.of ctx)
             locale (.toString (m/Localizations.localeOf ctx))
             formatter (.simpleCurrency i/NumberFormat .locale locale)]
-        (map #(card % theme formatter) prods))
+        (map #(card % theme-data formatter) prods))
       []))) ;; Else no products, so return an empty vector.
 
 (defn ^m/Widget home-page
