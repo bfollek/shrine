@@ -9,11 +9,11 @@
   []
   (let [base (.light m/ThemeData .useMaterial3 true)
         color-scheme (.-colorScheme base)]
-    (.copyWith base))); (.copyWith color-scheme))))
-                            ;;    .primary c/shrine-pink-100
-                            ;;    .onPrimary c/shrine-brown-900
-                            ;;    .secondary c/shrine-brown-900
-                            ;;    .error c/shrine-error-red))))
+    (.copyWith base .colorScheme (.copyWith color-scheme
+                                            .primary c/shrine-pink-100
+                                            .onPrimary c/shrine-brown-900
+                                            .secondary c/shrine-brown-900
+                                            .error c/shrine-error-red))))
 
 (def shrine-theme (build-shrine-theme))
 
