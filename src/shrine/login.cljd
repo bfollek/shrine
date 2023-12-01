@@ -18,7 +18,9 @@
                   .children
                   [(m/Image.asset "assets/diamond.png")
                    (m/SizedBox .height 16.0)
-                   (m/Text "SHRINE")])
+                   (m/Text "SHRINE"
+                           .style
+                           (-> ctx m/Theme.of .-textTheme .-headlineSmall))])
                  (m/SizedBox .height 120.0)
                  (m/TextField
                   .controller username-controller

@@ -5,7 +5,6 @@
             [shrine.login :as login]
             [cljd.flutter :as f]))
 
-(defonce app-state (atom {}))
 
 (defn main []
   (f/run

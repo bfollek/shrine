@@ -4,14 +4,46 @@
 
 (defonce app-state (atom {}))
 
+(defn build-shrine-text-theme
+  [base]
+  (let [headline-small (.-headlineSmall base)
+        title-large (.-titleLarge base)
+        body-small (.-bodySmall base)
+        body-large (.-bodyLarge base)]
+    (-> (.copyWith base
+                   .headlineSmall (.copyWith headline-small
+                                             .fontWeight m/FontWeight.w500)
+                   .titleLarge (.copyWith title-large
+                                          .fontSize 18.0)
+                   .bodySmall (.copyWith body-small
+                                         .fontSize 14.0
+                                         .fontWeight m/FontWeight.w400)
+                   .bodyLarge (.copyWith body-large
+                                         .fontSize 16.0
+                                         .fontWeight m/FontWeight.w500))
+        (.apply
+         .fontFamily "Rubik"
+         ;;.displayColor c/shrine-brown-900
+         ;;.bodyColor c/shrine-brown-900))))
+         ;; So I can see them.
+         .displayColor c/shrine-error-red
+         .bodyColor c/shrine-error-red))))
+
 (defn build-shrine-theme
   []
   (let [base (.light m/ThemeData .useMaterial3 true)
         color-scheme (.-colorScheme base)]
-    (.copyWith base .colorScheme (.copyWith color-scheme
-                                            .primary c/shrine-pink-100
-                                            .onPrimary c/shrine-brown-900
-                                            .secondary c/shrine-brown-900
-                                            .error c/shrine-error-red))))
+    (.copyWith base
+               .colorScheme (.copyWith
+                             color-scheme
+                             .primary c/shrine-pink-100
+                             .onPrimary c/shrine-brown-900
+                             .secondary c/shrine-brown-900
+                             .error c/shrine-error-red)
+               .textTheme
+               (build-shrine-text-theme (.-textTheme base))
+               .textSelectionTheme
+               (m/TextSelectionThemeData
+                .selectionColor c/shrine-pink-100))))
 
 (def shrine-theme (build-shrine-theme))
