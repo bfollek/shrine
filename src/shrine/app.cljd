@@ -5,12 +5,12 @@
 (defonce app-state (atom {}))
 
 (defn build-shrine-text-theme
-  [base]
-  (let [headline-small (.-headlineSmall ^m/TextTheme base)
-        title-large (.-titleLarge ^m/TextTheme base)
-        body-small (.-bodySmall ^m/TextTheme base)
-        body-large (.-bodyLarge ^m/TextTheme base)]
-    (-> (.copyWith ^m/TextTheme base
+  [^m/TextTheme base]
+  (let [headline-small (.-headlineSmall base)
+        title-large (.-titleLarge base)
+        body-small (.-bodySmall base)
+        body-large (.-bodyLarge base)]
+    (-> (.copyWith base
                    .headlineSmall (.copyWith headline-small
                                              .fontWeight m/FontWeight.w500)
                    .titleLarge (.copyWith title-large
