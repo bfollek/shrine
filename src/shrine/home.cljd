@@ -28,12 +28,14 @@
                           .crossAxisAlignment m/CrossAxisAlignment.start
                           .children [(m/Text
                                       (:name prod)
-                                      .style (.-titleLarge textTheme)
+                                      .style (.-button textTheme)
+                                      .softWrap false
+                                      .overflow m/TextOverflow.ellipsis
                                       .maxLines 1)
-                                     (m/SizedBox .height 8.0)
+                                     (m/SizedBox .height 4.0)
                                      (m/Text
                                       (.format formatter (:price prod))
-                                      .style (.-titleSmall textTheme))]))]))))
+                                      .style (.-bodySmall textTheme))]))]))))
 
 (defn ^:private build-grid-cards
   [ctx]
