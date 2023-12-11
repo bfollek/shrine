@@ -12,7 +12,10 @@
     (m/Card
      .clipBehavior m/Clip.antiAlias
      .child (m/Column
-             .crossAxisAlignment m/CrossAxisAlignment.start
+             ;; The Dart code that I got from the tutorial's
+             ;; github repo uses MainAxisAlignment.center.
+             .mainAxisAlignment m/MainAxisAlignment.end
+             .crossAxisAlignment m/CrossAxisAlignment.center
              .children [(m/AspectRatio
                          .aspectRatio (/ 18.0 11.0)
                          .child
@@ -25,7 +28,13 @@
                                    16.0 12.0 16.0 8.0)
                          .child
                          (m/Column
-                          .crossAxisAlignment m/CrossAxisAlignment.start
+                          ;; I initially put the *AxisAlignment commands 
+                          ;; from the 103 tutorial here instead of the
+                          ;; outer column, and they didn't seem to have
+                          ;; any effect. I guess the inner column alignment
+                          ;; here is relative to the outer column alignment.
+                          ;; That makes sense.
+                          .crossAxisAlignment m/CrossAxisAlignment.center
                           .children [(m/Text
                                       (:name prod)
                                       .style (.-button textTheme)
