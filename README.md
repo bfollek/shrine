@@ -7,7 +7,7 @@ https://codelabs.developers.google.com/codelabs/mdc-101-flutter)  [progressive](
 
 ### Status
 
-I've finished the [mdc-102-flutter](https://codelabs.developers.google.com/codelabs/mdc-102-flutter) tutorial.
+I've finished the [mdc-103-flutter](https://codelabs.developers.google.com/codelabs/mdc-103-flutter) tutorial, `5. Modify typography and label styles`
 
 ### FAQ
 
