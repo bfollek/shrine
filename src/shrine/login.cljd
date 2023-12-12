@@ -39,8 +39,11 @@
                                       (map #(.clear ^m/TextEditingController %)
                                            [username-controller
                                             password-controller])))
-                              .style (m/TextButton.styleFrom
-                                      .primary (.-colorScheme.secondary m/Theme.of ctx)))
+                              .style
+                              (m/TextButton.styleFrom
+                               .primary (->> (m/Theme.of ctx)
+                                             .-colorScheme
+                                             .-secondary)))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
                               .onPressed #(.pop m/Navigator ctx))])])))))
