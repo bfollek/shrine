@@ -40,6 +40,8 @@
                              .onPrimary c/shrine-brown-900
                              .secondary c/shrine-brown-900
                              .error c/shrine-error-red)
+               .inputDecorationTheme (m/InputDecorationTheme
+                                      .border (m/OutlineInputBorder))
                .textTheme
                (build-shrine-text-theme (.-textTheme base))
                .textSelectionTheme
