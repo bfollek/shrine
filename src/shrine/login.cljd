@@ -38,7 +38,9 @@
                               (fn [] (doall
                                       (map #(.clear ^m/TextEditingController %)
                                            [username-controller
-                                            password-controller]))))
+                                            password-controller])))
+                              .style (m/TextButton.styleFrom
+                                      .primary (.-colorScheme.secondary m/Theme.of ctx)))
                              (m/ElevatedButton
                               .child (m/Text "NEXT")
                               .onPressed #(.pop m/Navigator ctx))])])))))
