@@ -42,10 +42,11 @@
                              .error c/shrine-error-red)
                .inputDecorationTheme (m/InputDecorationTheme
                                       .border (m/OutlineInputBorder)
-                                      .focusedBorder (m/OutlineInputBorder
-                                                      .borderSide (m/BorderSide
-                                                                   .width 2.0
-                                                                   .color c/shrine-brown-900)))
+                                      .focusedBorder
+                                      (m/OutlineInputBorder
+                                       .borderSide (m/BorderSide
+                                                    .width 2.0
+                                                    .color c/shrine-brown-900)))
                .textTheme
                (build-shrine-text-theme (.-textTheme base))
                .textSelectionTheme
